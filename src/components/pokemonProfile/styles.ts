@@ -14,13 +14,15 @@ export const Card = styled.Pressable`
 `;
 export const Text = styled.Text`
   font-size: 14px;
-  font-weight: 600;
+  margin-bottom: 8px;
+  font-weight: bold;
   text-transform: uppercase;
   color: ${colors.primaryColor};
 `;
 export const Image = styled.Image`
   height: 100px;
   width: 100px;
+  margin-top: 20px;
 `;
 export const Footer = styled.View`
   display: flex;

@@ -1,7 +1,7 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/core';
 import Header from '../../components/header';
-import {Container, ContainerImage, Scrow} from './styles';
+import {Container, ContainerImage, Scrow, TextInfo} from './styles';
 import {RootStateOrAny, useSelector} from 'react-redux';
 import {PokemonStateReducer} from '../../store/ducks/pokemon/types';
 import PokemonProfile from '../../components/pokemonProfile';
@@ -24,20 +24,26 @@ const PokemonDetail = ({route}) => {
           <ActivityIndicator size={40} color={colors.white} />
         ) : (
           <>
-            <ContainerImage>
-              <Image
-                style={{height: 70, width: 200}}
-                resizeMode="cover"
-                source={require('../../../assets/image/pokemon.png')}
-              />
-            </ContainerImage>
-            <PokemonProfile
-              isDetail
-              height={pokemonDetail?.height}
-              width={pokemonDetail?.weight}
-              name={pokemonDetail?.name}
-              url={photo}
-            />
+            {pokemonDetail !== null ? (
+              <>
+                <ContainerImage>
+                  <Image
+                    style={{height: 70, width: 200}}
+                    resizeMode="cover"
+                    source={require('../../../assets/image/pokemon.png')}
+                  />
+                </ContainerImage>
+                <PokemonProfile
+                  isDetail
+                  height={pokemonDetail?.height}
+                  width={pokemonDetail?.weight}
+                  name={pokemonDetail?.name}
+                  url={photo}
+                />
+              </>
+            ) : (
+              <TextInfo>Não possível carregar o pokemon :(</TextInfo>
+            )}
           </>
         )}
       </Scrow>

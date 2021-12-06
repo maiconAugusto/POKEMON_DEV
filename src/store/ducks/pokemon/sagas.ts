@@ -9,7 +9,14 @@ import {
 } from './actions';
 import {PokemonDetail} from './types';
 
-export function* REQUEST_POKEMONS({payload}) {
+export function* REQUEST_POKEMONS({
+  payload,
+}: {
+  payload: {
+    offset: string;
+    limit: string;
+  };
+}) {
   try {
     const {offset, limit} = payload;
 
@@ -25,7 +32,7 @@ export function* REQUEST_POKEMONS({payload}) {
   }
 }
 
-export function* REQUEST_POKEMONS_BY_ID({payload}) {
+export function* REQUEST_POKEMONS_BY_ID({payload}: {payload: string}) {
   try {
     const response: AxiosResponse = yield call(
       axiosDefault.get,
@@ -34,10 +41,10 @@ export function* REQUEST_POKEMONS_BY_ID({payload}) {
     const {forms, height, weight} = response.data;
 
     const pokemonDetail: PokemonDetail = {
-      name: forms[0]?.name,
+      name: forms[0]?.name || '',
       height,
       weight,
-      url: forms[0]?.url,
+      url: forms[0]?.url || '',
     };
 
     store.dispatch(REQUEST_POKEMON_BY_ID_SUCCESS(pokemonDetail));
