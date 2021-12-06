@@ -10,7 +10,7 @@ export const Header = styled.View`
   height: 80px;
   display: flex;
   align-items: center;
-  margin: 0px 20px 0px 20px;
+  margin: 10px 20px 0px 20px;
 `;
 export const Image = styled.Image`
   height: 70px;
