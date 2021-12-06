@@ -1,10 +1,8 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
 import PokemonView from '../screens/pokemon';
 import PokemonDetail from '../screens/pokemonDetail';
-
 import {RootRouter} from '../const/routes';
 
 const Stack = createNativeStackNavigator();

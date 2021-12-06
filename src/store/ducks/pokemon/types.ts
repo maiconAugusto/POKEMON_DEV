@@ -3,6 +3,13 @@ export interface Pokemon {
   url?: string;
 }
 
+export interface PokemonDetail {
+  name: string;
+  weight: string;
+  height: string;
+  url: string;
+}
+
 export enum PokemonTypes {
   POKEMON_REQUEST = '@POKEMON_REQUEST',
   POKEMON_REQUEST_BY_ID = '@POKEMON_REQUEST_BY_ID',
@@ -11,13 +18,14 @@ export enum PokemonTypes {
   POKEMON_REQUEST_FAILURE = '@POKEMON_REQUEST_FAILURE',
   SET_POKEMON_DATA = '@SET_POKEMON_DATA',
   SET_POKEMON_DATA_BY_ID = '@SET_POKEMON_DATA_BY_ID',
+  CLEAN_POKEMON_DATA = '@CLEAN_POKEMON_DATA',
 }
 
 export interface PokemonStateReducer {
   readonly loading: boolean;
+  readonly loadingDetail: boolean;
   readonly data: Array<any>;
-  readonly error: string;
-  readonly isError: boolean;
+  readonly pokemonDetail: PokemonDetail | null;
 }
 
 interface RequestPokemonData {
@@ -40,7 +48,6 @@ interface SetPokemonDataByID {
 
 interface RequestFailure {
   type: typeof PokemonTypes.POKEMON_REQUEST_FAILURE;
-  payload: string;
 }
 
 interface RequestSuccess {
@@ -53,10 +60,15 @@ interface RequestSuccessById {
   payload: Pokemon;
 }
 
+interface CleanPokemonData {
+  type: typeof PokemonTypes.CLEAN_POKEMON_DATA;
+}
+
 export type PokemonActionsType =
   | RequestPokemonData
   | RequestSuccessById
   | RequestSuccess
   | RequestPokemonDataByID
   | SetPokemonDataByID
-  | RequestFailure;
+  | RequestFailure
+  | CleanPokemonData;

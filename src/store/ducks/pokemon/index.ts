@@ -2,9 +2,9 @@ import {PokemonActionsType, PokemonTypes, PokemonStateReducer} from './types';
 
 const INITIAL_STATE: PokemonStateReducer = {
   data: [],
-  error: '',
-  isError: false,
+  pokemonDetail: null,
   loading: false,
+  loadingDetail: false,
 };
 
 const pokemonReducer = (state = INITIAL_STATE, action: PokemonActionsType) => {
@@ -24,23 +24,24 @@ const pokemonReducer = (state = INITIAL_STATE, action: PokemonActionsType) => {
       return {
         ...state,
         loading: false,
+        loadingDetail: false,
       };
     case PokemonTypes.POKEMON_REQUEST_BY_ID:
       return {
         ...state,
-        loading: true,
+        loadingDetail: true,
       };
     case PokemonTypes.POKEMON_REQUEST_SUCCESS_BY_ID:
       return {
         ...state,
-        loading: false,
-        data: action.payload,
+        loadingDetail: false,
+        pokemonDetail: action.payload,
       };
-    case PokemonTypes.POKEMON_REQUEST_FAILURE:
+    case PokemonTypes.CLEAN_POKEMON_DATA:
       return {
         ...state,
-        loading: false,
-        errorMessage: action.payload,
+        data: [],
+        pokemonDetail: null,
       };
     default:
       return state;

@@ -1,18 +1,23 @@
 import React, {useEffect, useState} from 'react';
 import {RootStateOrAny, useDispatch, useSelector} from 'react-redux';
 import {Container, Header, Image} from './styles';
-import {REQUEST_POKEMON} from '../../store/ducks/pokemon/actions';
+import {
+  CLEAN_POKEMON_DATA,
+  REQUEST_POKEMON,
+  REQUEST_POKEMON_BY_ID,
+} from '../../store/ducks/pokemon/actions';
 import {PokemonStateReducer} from '../../store/ducks/pokemon/types';
 import {FlatList, RefreshControl} from 'react-native';
 import colors from '../../const/colors';
-import {Urls} from '../../utils/urls';
+import {GenerateImage} from '../../utils/generateImage';
 import PokemonProfile from '../../components/pokemonProfile';
 import {useNavigation} from '@react-navigation/core';
-import { RootRouter } from '../../const/routes';
+import {RootRouter} from '../../const/routes';
+import {GetIdPokemon} from '../../utils/getIdPokemen';
 
 const PokemonView = () => {
   const navigation = useNavigation();
-  const [offset, setOffset] = useState<number>(20);
+  const [offset, setOffset] = useState<number>(10);
   const [limit] = useState<number>(20);
   const dispatch = useDispatch();
   const {data, loading} = useSelector<RootStateOrAny, PokemonStateReducer>(
@@ -32,24 +37,23 @@ const PokemonView = () => {
   const handlePokemon = ({item}) => {
     const {url: urls, name} = item;
 
-    let url = urls;
-    const idPokemon = url.split('https://pokeapi.co/api/v2/pokemon/');
-    const link =
-      Urls.urlImage +
-      idPokemon[1].substring(0, idPokemon[1].length - 1) +
-      '.png';
-
     return (
       <PokemonProfile
-        url={link}
+        url={GenerateImage(urls)}
+        key={GetIdPokemon(urls)}
         name={name}
-        onPress={() => navigation.navigate(RootRouter.pokemonDetails)}
+        onPress={() => {
+          dispatch(REQUEST_POKEMON_BY_ID(GetIdPokemon(urls)));
+          navigation.navigate(RootRouter.pokemonDetails, {
+            photo: GenerateImage(urls),
+          });
+        }}
       />
     );
   };
 
   const loadPage = () => {
-    const value = offset + 20;
+    const value = offset + 10;
     dispatch(REQUEST_POKEMON({offset: value, limit: limit}));
     setOffset(value);
   };
@@ -61,11 +65,15 @@ const PokemonView = () => {
         extraData={data}
         refreshControl={
           <RefreshControl
-            onRefresh={() => dispatch(REQUEST_POKEMON({offset: 20, limit: 20}))}
+            onRefresh={() => {
+              dispatch(CLEAN_POKEMON_DATA());
+              dispatch(REQUEST_POKEMON({offset: 10, limit: 20}));
+            }}
             colors={[colors.primaryColor, colors.secondaryColor]}
             refreshing={loading}
           />
         }
+        keyExtractor={(item, index) => index.toString()}
         renderItem={handlePokemon}
         onEndReachedThreshold={0.2}
         onEndReached={() => !loading && loadPage()}

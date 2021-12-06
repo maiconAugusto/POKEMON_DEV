@@ -1,4 +1,4 @@
-import {PokemonActionsType, PokemonTypes} from './types';
+import {PokemonActionsType, PokemonDetail, PokemonTypes} from './types';
 
 export function REQUEST_POKEMON(payload: {
   offset: number;
@@ -24,16 +24,20 @@ export function REQUEST_POKEMON_SUCCESS(
   };
 }
 export function REQUEST_POKEMON_BY_ID_SUCCESS(
-  payload: any,
+  payload: PokemonDetail,
 ): PokemonActionsType {
   return {
     type: PokemonTypes.POKEMON_REQUEST_SUCCESS_BY_ID,
     payload,
   };
 }
-export function REQUEST_POKEMON_FAILURE(payload: string): PokemonActionsType {
+export function REQUEST_POKEMON_FAILURE(): PokemonActionsType {
   return {
     type: PokemonTypes.POKEMON_REQUEST_FAILURE,
-    payload,
+  };
+}
+export function CLEAN_POKEMON_DATA(): PokemonActionsType {
+  return {
+    type: PokemonTypes.CLEAN_POKEMON_DATA,
   };
 }

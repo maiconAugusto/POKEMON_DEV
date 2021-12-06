@@ -22,3 +22,11 @@ export const Image = styled.Image`
   height: 100px;
   width: 100px;
 `;
+export const Footer = styled.View`
+  display: flex;
+  height: 80px;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+`;
