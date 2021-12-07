@@ -8,6 +8,13 @@ export interface PokemonDetail {
   weight: string;
   height: string;
   url: string;
+  types: Array<{
+    slot: number;
+    type: {
+      name: string;
+      url: string;
+    };
+  }>;
 }
 
 export enum PokemonTypes {

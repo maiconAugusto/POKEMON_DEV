@@ -26,3 +26,19 @@ export const TextInfo = styled.Text`
   text-align: center;
   margin-top: 10px;
 `;
+export const Text = styled.Text`
+  font-size: 14px;
+  text-transform: uppercase;
+  color: ${colors.primaryColor};
+  font-weight: bold;
+  margin: 10px 4px 10px 4px;
+`;
+export const Card = styled.Pressable`
+  display: flex;
+  flex-direction: row;
+  margin: 10px 20px 10px 20px;
+  background-color: ${colors.card};
+  border-radius: 10px;
+  box-shadow: 5px 5px 8px #242424;
+  padding: 10px;
+`;

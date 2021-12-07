@@ -1,7 +1,7 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/core';
 import Header from '../../components/header';
-import {Container, ContainerImage, Scrow, TextInfo} from './styles';
+import {Card, Container, ContainerImage, Scrow, Text, TextInfo} from './styles';
 import {RootStateOrAny, useSelector} from 'react-redux';
 import {PokemonStateReducer} from '../../store/ducks/pokemon/types';
 import PokemonProfile from '../../components/pokemonProfile';
@@ -40,6 +40,12 @@ const PokemonDetail = ({route}) => {
                   name={pokemonDetail?.name}
                   url={photo}
                 />
+                <Card>
+                  <Text>Tipo:</Text>
+                  {pokemonDetail?.types?.map(item => (
+                    <Text>{item?.type?.name}</Text>
+                  ))}
+                </Card>
               </>
             ) : (
               <TextInfo>Não possível carregar o pokemon :(</TextInfo>

@@ -38,13 +38,14 @@ export function* REQUEST_POKEMONS_BY_ID({payload}: {payload: string}) {
       axiosDefault.get,
       `pokemon/${payload}/`,
     );
-    const {forms, height, weight} = response.data;
+    const {forms, height, weight, types} = response.data;
 
     const pokemonDetail: PokemonDetail = {
       name: forms[0]?.name || '',
       height,
       weight,
       url: forms[0]?.url || '',
+      types: types,
     };
 
     store.dispatch(REQUEST_POKEMON_BY_ID_SUCCESS(pokemonDetail));
