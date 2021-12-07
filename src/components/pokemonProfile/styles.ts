@@ -20,8 +20,8 @@ export const Text = styled.Text`
   color: ${colors.primaryColor};
 `;
 export const Image = styled.Image`
-  height: 100px;
-  width: 100px;
+  min-height: 100px;
+  min-width: 100px;
   margin-top: 20px;
 `;
 export const Footer = styled.View`
