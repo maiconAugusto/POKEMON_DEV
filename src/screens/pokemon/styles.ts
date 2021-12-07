@@ -16,3 +16,10 @@ export const Image = styled.Image`
   height: 70px;
   width: 200px;
 `;
+export const TextInfo = styled.Text`
+  font-size: 14px;
+  text-transform: uppercase;
+  color: ${colors.white};
+  text-align: center;
+  margin-top: 20px;
+`;

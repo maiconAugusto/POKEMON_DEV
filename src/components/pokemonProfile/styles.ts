@@ -9,7 +9,7 @@ export const Card = styled.Pressable`
   margin: 10px 20px 10px 20px;
   background-color: ${colors.card};
   border-radius: 10px;
-  box-shadow: 5px 5px 8px #2e2e2e;
+  box-shadow: 5px 5px 8px #242424;
   padding: 10px;
 `;
 export const Text = styled.Text`

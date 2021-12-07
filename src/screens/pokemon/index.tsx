@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {RootStateOrAny, useDispatch, useSelector} from 'react-redux';
-import {Container, Header, Image} from './styles';
+import {Container, Header, Image, TextInfo} from './styles';
 import {
   CLEAN_POKEMON_DATA,
   REQUEST_POKEMON,
@@ -84,6 +84,11 @@ const PokemonView = () => {
               source={require('../../../assets/image/pokemon.png')}
             />
           </Header>
+        }
+        ListEmptyComponent={
+          !loading ? (
+            <>{data.length === 0 && <TextInfo>Sem itens na lista</TextInfo>}</>
+          ) : null
         }
       />
     </Container>
